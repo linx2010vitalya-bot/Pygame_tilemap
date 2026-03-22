@@ -30,6 +30,10 @@ class TileEditor:
             elif button == 3:
                 self.map_data[row][col] = 0
 
+    def set_current_tile(self, tile_id):
+
+        if tile_id in self.tile_colors:
+            self.current_tile = tile_id
 
 
 
@@ -49,5 +53,3 @@ class TileEditor:
 
 
 
-
-                
