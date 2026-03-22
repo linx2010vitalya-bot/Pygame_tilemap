@@ -1,3 +1,5 @@
+import json
+
 class TileEditor:
     def __init__(self,width,height, tile_size):
 
@@ -35,6 +37,18 @@ class TileEditor:
         if tile_id in self.tile_colors:
             self.current_tile = tile_id
 
+    def safe_to_file(self, filename):
+        data = {
+            "width": self.width,
+            "height": self.height,
+            "tile_size": self.tile_size,
+            "map": self.map_data
+        }
+
+        with open(filename, 'w', encoding='utf-8') as file:
+            json.dump(data, f, indent=2)
+
+        print(f"Карта сохранения в {filename}")
 
 
 
