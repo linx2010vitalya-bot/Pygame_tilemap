@@ -101,6 +101,14 @@ class TileEditor:
              num_text = font.render(str(tile_id), True, (255, 255, 255))
              screen.blit(num_text, (x + 35, y + 5))
 
+             hints = [
+                  "1-4: Выбор тайла",
+                  "ЛКМ: Рисовать",
+                  "ПКМ: Стирать",
+                  "S: Сохранить",
+                  "L: Загрузить"
+             ]
+
              hint_y = 250
              for hint in hints:
                 text = pg.font.Font(None, 22).render(hint, True, (200, 200, 200))
