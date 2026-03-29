@@ -90,7 +90,7 @@ class TileEditor:
         palette_y = 70
         for tile_id in range(1,5):
              x = 10
-             y = palette_y + (title_id - 1) * 35
+             y = palette_y + (tile_id - 1) * 35
 
              color = self.tile_colors[tile_id]
              pg.draw.rect(screen, color, (x, y, 30, 30))
