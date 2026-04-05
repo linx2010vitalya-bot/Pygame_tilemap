@@ -4,6 +4,9 @@ import pygame as pg
 class TileEditor:
     def __init__(self,width,height, tile_size):
 
+        self.height = height
+        self.width = width
+        self.tile_size = tile_size
         self.map_data = [[0 for _ in range(width)] for _ in range(height)]
 
         self.current_tile = 1
@@ -76,7 +79,7 @@ class TileEditor:
 
                  color = self.tile_colors.get(tile_id, (255, 0, 255))
                  pg.draw.rect(screen, color, (x, y, self.tile_size, self.tile_size))
-                 pg.draw.rect(screen, (100, 100, 100), (x, y, self.tile_size, self.tile_size))
+                 pg.draw.rect(screen, (100, 100, 100), (x, y, self.tile_size, self.tile_size), 2)
 
     def draw_ui(self, screen):
         font = pg.font.Font(None, 28)

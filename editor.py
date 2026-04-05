@@ -63,7 +63,7 @@ while running:
     pg.draw.rect(screen, (20, 20, 30), (0, 0, 150, 600))
 
 
-    map_surface = pg.surface((640, 400))
+    map_surface = pg.Surface((640, 480))
     editor.draw(map_surface)
     screen.blit(map_surface, (editor.offset_x, editor.offset_y))
 
