@@ -78,3 +78,12 @@ class Player:
                 if tilemap.is_danger(px, py):
                     self.alive = False
                     break
+
+    def draw(self, screen, camera_x = 0, camera_y = 0):
+        if self.alive:
+            color = (0, 255, 0) if self.on_ground else (0, 200, 255)
+            x = int(self.x - camera_x)
+            y = int(self.y - camera_y)
+
+            pg.draw.rect(screen, color, (x, y, self.width, self.height))
+            pg.draw.rect(screen, (0, 0, 0), (x, y, self.width, self.height), 2)
