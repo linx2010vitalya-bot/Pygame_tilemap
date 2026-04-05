@@ -14,3 +14,11 @@ editor.load_from_file("tilemap.json")
 
 
 mouse_pressed = False
+
+running = True
+while running:
+    clock.tick(60)
+
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            running = False
