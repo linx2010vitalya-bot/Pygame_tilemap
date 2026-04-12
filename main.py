@@ -65,3 +65,23 @@ while running:
 
     camera_x = max(0, min(camera_x, tilemap.width * tilemap.tile_size - 800))
     camera_y = max(0, min(camera_y, tilemap.height * tilemap.tile_size - 600))
+
+
+    screen.fill((135, 206, 235))
+
+    tilemap.draw(screen, camera_x, camera_y)
+    player.draw(screen, camera_x, camera_y)
+
+
+    font = pg.font.Font(None, 36)
+
+    if not player.alive:
+        game_over = font.render("GAME OVER", True, (255, 0, 0))
+        screen.blit(game_over, (300, 250))
+
+        restart = pg.font.Font(None, 28).render("Нажми R для перезапуска", True, (255, 255, 255))
+        screen.blit(restart, (260, 300))
+
+    pg.display.flip()
+
+pg.quit
