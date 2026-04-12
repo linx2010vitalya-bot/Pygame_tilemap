@@ -55,3 +55,5 @@ while running:
 
                 player = player(100, 300)
 
+    keys = pg.key.get_pressed()
+    player.update(dt, keys, tilemap)
