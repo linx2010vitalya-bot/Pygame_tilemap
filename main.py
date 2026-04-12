@@ -1,5 +1,5 @@
 import pygame as pg
-from modules.tilemap import Tilemap
+from modules.tilemap import TileMap
 from modules.tilemap import Player
 
 
@@ -9,7 +9,7 @@ pg.display.set_caption("Tilemap Platformer")
 clock = pg.time.Clock()
 
 
-tilemap = Tilemap(tile_size=32)
+tilemap = TileMap(tile_size=32)
 try:
     tilemap.load_from_file("tilemap.json")
 except FileNotFoundError:
