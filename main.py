@@ -1,0 +1,87 @@
+import pygame as pg
+from modules.tilemap import TileMap
+from modules.player import Player
+
+
+pg.init()
+screen = pg.display.set_mode((800, 600))
+pg.display.set_caption("Tilemap Platformer")
+clock = pg.time.Clock()
+
+
+tilemap = TileMap(tile_size=32)
+try:
+    tilemap.load_from_file("tilemap.json")
+except FileNotFoundError:
+    print("Создайте карту в редакторе сначала!")
+
+    tilemap.map_data = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        [0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+    ]
+    tilemap.width = 20
+    tilemap.height = 15
+
+
+player = Player(100, 300)
+
+
+camera_x = 0
+camera_y = 0
+
+running = True
+while running:
+    dt = clock.tick(60) / 1000.0
+
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            running = False
+
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_r and not player.alive:
+
+                player = player(100, 300)
+
+    keys = pg.key.get_pressed()
+    player.update(dt, keys, tilemap)
+
+
+    camera_x = player.x + player.width / 2 - 400
+    camera_y = player.y + player.height / 2 - 300
+
+
+    camera_x = max(0, min(camera_x, tilemap.width * tilemap.tile_size - 800))
+    camera_y = max(0, min(camera_y, tilemap.height * tilemap.tile_size - 600))
+
+
+    screen.fill((135, 206, 235))
+
+    tilemap.draw(screen, camera_x, camera_y)
+    player.draw(screen, camera_x, camera_y)
+
+
+    font = pg.font.Font(None, 36)
+
+    if not player.alive:
+        game_over = font.render("GAME OVER", True, (255, 0, 0))
+        screen.blit(game_over, (300, 250))
+
+        restart = pg.font.Font(None, 28).render("Нажми R для перезапуска", True, (255, 255, 255))
+        screen.blit(restart, (260, 300))
+
+    pg.display.flip()
+
+pg.quit()
