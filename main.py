@@ -1,6 +1,6 @@
 import pygame as pg
 from modules.tilemap import TileMap
-from modules.tilemap import Player
+from modules.player import Player
 
 
 pg.init()
