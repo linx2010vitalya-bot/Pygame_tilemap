@@ -1,6 +1,6 @@
 import pygame as pg
-from modules.tilemap import tilemap
-
+from modules.tilemap import Tilemap
+from modules.tilemap import Player
 
 
 pg.init()
@@ -47,4 +47,11 @@ while running:
     dt = clock.tick(60) / 1000.0
 
     for event in pg.event.get():
-        if event.type == pg.
+        if event.type == pg.QUIT:
+            running = False
+
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_r and not player.alive:
+
+                player = player(100, 300)
+
